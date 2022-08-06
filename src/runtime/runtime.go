@@ -100,3 +100,11 @@ func godebug_setUpdate(update func(string, string)) {
 	// variable changes (for example, via os.Setenv).
 	godebugUpdate = update
 }
+
+//export __GoABI0_runtime.entersyscall
+func entersyscall() {
+}
+
+//export __GoABI0_runtime.exitsyscall
+func exitsyscall() {
+}
