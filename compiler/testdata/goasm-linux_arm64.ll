@@ -1,7 +1,7 @@
 ; ModuleID = 'goasm.go'
 source_filename = "goasm.go"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-unknown-linux"
+target datalayout = "e-m:e-i8:8:32-i16:16:32-i64:64-i128:128-n32:64-S128"
+target triple = "aarch64-unknown-linux"
 
 %runtime._string = type { ptr, i64 }
 %main.AsmStruct = type { i64, i64 }
@@ -12,40 +12,40 @@ target triple = "x86_64-unknown-linux"
 
 declare noalias nonnull ptr @runtime.alloc(i64, ptr, ptr) #0
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden void @main.init(ptr %context) unnamed_addr #1 {
 entry:
   ret void
 }
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden double @main.AsmSqrt(double %x, ptr %context) unnamed_addr #1 {
 entry:
-  %0 = call double asm sideeffect alignstack "subq $$16, %rsp\0A\09movsd %xmm0, 0(%rsp)\0A\09callq \22__GoABI0_main.AsmSqrt\22\0A\09movsd 8(%rsp), %xmm0\0A\09addq $$16, %rsp", "={xmm0},{xmm0},~{fpsr},~{fpcr},~{flags},~{dirflag},~{memory},~{rdi},~{rsi},~{rdx},~{rcx},~{r8},~{r9},~{rax},~{rbx},~{rbp},~{r10},~{r11},~{r12},~{r13},~{r14},~{r15},~{xmm1},~{xmm2},~{xmm3},~{xmm4},~{xmm5},~{xmm6},~{xmm7},~{xmm8},~{xmm9},~{xmm10},~{xmm11},~{xmm12},~{xmm13},~{xmm14},~{xmm15},~{xmm16},~{xmm17},~{xmm18},~{xmm19},~{xmm20},~{xmm21},~{xmm22},~{xmm23},~{xmm24},~{xmm25},~{xmm26},~{xmm27},~{xmm28},~{xmm29},~{xmm30},~{xmm31}"(double %x) #4
+  %0 = call double asm sideeffect alignstack "sub sp, sp, #32\0A\09str d0, [sp, #8]\0A\09bl \22__GoABI0_main.AsmSqrt\22\0A\09ldr d0, [sp, #16]\0A\09add sp, sp, #32", "={d0},{d0},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{lr},~{nzcv},~{ffr},~{vg},~{memory},~{x18},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{d1},~{d2},~{d3},~{d4},~{d5},~{d6},~{d7},~{d8},~{d9},~{d10},~{d11},~{d12},~{d13},~{d14},~{d15},~{d16},~{d17},~{d18},~{d19},~{d20},~{d21},~{d22},~{d23},~{d24},~{d25},~{d26},~{d27},~{d28},~{d29},~{d30}"(double %x) #4
   ret double %0
 }
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden double @main.AsmAdd(double %x, double %y, ptr %context) unnamed_addr #1 {
 entry:
-  %0 = call double asm sideeffect alignstack "subq $$32, %rsp\0A\09movsd %xmm0, 0(%rsp)\0A\09movsd %xmm1, 8(%rsp)\0A\09callq \22__GoABI0_main.AsmAdd\22\0A\09movsd 16(%rsp), %xmm0\0A\09addq $$32, %rsp", "={xmm0},{xmm0},{xmm1},~{fpsr},~{fpcr},~{flags},~{dirflag},~{memory},~{rdi},~{rsi},~{rdx},~{rcx},~{r8},~{r9},~{rax},~{rbx},~{rbp},~{r10},~{r11},~{r12},~{r13},~{r14},~{r15},~{xmm1},~{xmm2},~{xmm3},~{xmm4},~{xmm5},~{xmm6},~{xmm7},~{xmm8},~{xmm9},~{xmm10},~{xmm11},~{xmm12},~{xmm13},~{xmm14},~{xmm15},~{xmm16},~{xmm17},~{xmm18},~{xmm19},~{xmm20},~{xmm21},~{xmm22},~{xmm23},~{xmm24},~{xmm25},~{xmm26},~{xmm27},~{xmm28},~{xmm29},~{xmm30},~{xmm31}"(double %x, double %y) #4
+  %0 = call double asm sideeffect alignstack "sub sp, sp, #32\0A\09str d0, [sp, #8]\0A\09str d1, [sp, #16]\0A\09bl \22__GoABI0_main.AsmAdd\22\0A\09ldr d0, [sp, #24]\0A\09add sp, sp, #32", "={d0},{d0},{d1},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{lr},~{nzcv},~{ffr},~{vg},~{memory},~{x18},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{d1},~{d2},~{d3},~{d4},~{d5},~{d6},~{d7},~{d8},~{d9},~{d10},~{d11},~{d12},~{d13},~{d14},~{d15},~{d16},~{d17},~{d18},~{d19},~{d20},~{d21},~{d22},~{d23},~{d24},~{d25},~{d26},~{d27},~{d28},~{d29},~{d30}"(double %x, double %y) #4
   ret double %0
 }
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden { i64, double } @main.AsmFoo(double %x, ptr %context) unnamed_addr #1 {
 entry:
-  %0 = call { i64, double } asm sideeffect alignstack "subq $$32, %rsp\0A\09movsd %xmm0, 0(%rsp)\0A\09callq \22__GoABI0_main.AsmFoo\22\0A\09movq 8(%rsp), %rdi\0A\09movsd 16(%rsp), %xmm0\0A\09addq $$32, %rsp", "={rdi},={xmm0},{xmm0},~{fpsr},~{fpcr},~{flags},~{dirflag},~{memory},~{rsi},~{rdx},~{rcx},~{r8},~{r9},~{rax},~{rbx},~{rbp},~{r10},~{r11},~{r12},~{r13},~{r14},~{r15},~{xmm1},~{xmm2},~{xmm3},~{xmm4},~{xmm5},~{xmm6},~{xmm7},~{xmm8},~{xmm9},~{xmm10},~{xmm11},~{xmm12},~{xmm13},~{xmm14},~{xmm15},~{xmm16},~{xmm17},~{xmm18},~{xmm19},~{xmm20},~{xmm21},~{xmm22},~{xmm23},~{xmm24},~{xmm25},~{xmm26},~{xmm27},~{xmm28},~{xmm29},~{xmm30},~{xmm31}"(double %x) #4
+  %0 = call { i64, double } asm sideeffect alignstack "sub sp, sp, #32\0A\09str d0, [sp, #8]\0A\09bl \22__GoABI0_main.AsmFoo\22\0A\09ldr x0, [sp, #16]\0A\09ldr d0, [sp, #24]\0A\09add sp, sp, #32", "={x0},={d0},{d0},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{lr},~{nzcv},~{ffr},~{vg},~{memory},~{x18},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{d1},~{d2},~{d3},~{d4},~{d5},~{d6},~{d7},~{d8},~{d9},~{d10},~{d11},~{d12},~{d13},~{d14},~{d15},~{d16},~{d17},~{d18},~{d19},~{d20},~{d21},~{d22},~{d23},~{d24},~{d25},~{d26},~{d27},~{d28},~{d29},~{d30}"(double %x) #4
   ret { i64, double } %0
 }
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden double @main.asmExport(double %x, ptr %context) unnamed_addr #1 {
 entry:
   ret double 0.000000e+00
 }
 
-; Function Attrs: noinline nounwind alignstack(16) uwtable(sync)
+; Function Attrs: noinline nounwind
 define internal void @"main.asmExport$goasmwrapper"(ptr %0) #2 {
 entry:
   %1 = getelementptr i8, ptr %0, i64 8
@@ -56,18 +56,18 @@ entry:
   ret void
 }
 
-; Function Attrs: naked nounwind uwtable(sync)
+; Function Attrs: naked nounwind
 define void @__GoABI0_main.asmExport() #3 {
 entry:
-  %sp = call ptr asm "mov %rsp, $0", "=r"() #4
+  %sp = call ptr asm "mov x0, sp", "=r"() #4
   tail call void @"main.asmExport$goasmwrapper"(ptr %sp)
   ret void
 }
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden { i1, i64, i8, i16, i32, i64, i64, i8, i16, i32, i64, i64 } @main.AsmAllIntTypes(i1 %b, i64 %i, i8 %i8, i16 %i16, i32 %i32, i64 %i64, i64 %u, i8 %u8, i16 %u16, i32 %u32, i64 %u64, i64 %uptr, ptr %context) unnamed_addr #1 {
 entry:
-  %0 = call { i1, i64, i8, i16, i32, i64, i64, i8, i16, i32, i64, i64 } asm sideeffect alignstack "subq $$128, %rsp\0A\09movb %dil, 0(%rsp)\0A\09movq %rsi, 8(%rsp)\0A\09movb %dl, 16(%rsp)\0A\09movw %cx, 18(%rsp)\0A\09movl %r8d, 20(%rsp)\0A\09movq %r9, 24(%rsp)\0A\09movq %rax, 32(%rsp)\0A\09movb %bl, 40(%rsp)\0A\09movw %bp, 42(%rsp)\0A\09movl %r10d, 44(%rsp)\0A\09movq %r11, 48(%rsp)\0A\09movq %r12, 56(%rsp)\0A\09callq \22__GoABI0_main.AsmAllIntTypes\22\0A\09movzbl 64(%rsp), %edi\0A\09movq 72(%rsp), %rsi\0A\09movsbl 80(%rsp), %edx\0A\09movswl 82(%rsp), %ecx\0A\09movl 84(%rsp), %r8d\0A\09movq 88(%rsp), %r9\0A\09movq 96(%rsp), %rax\0A\09movzbl 104(%rsp), %ebx\0A\09movzwl 106(%rsp), %ebp\0A\09movl 108(%rsp), %r10d\0A\09movq 112(%rsp), %r11\0A\09movq 120(%rsp), %r12\0A\09addq $$128, %rsp", "={edi},={rsi},={edx},={ecx},={r8d},={r9},={rax},={ebx},={ebp},={r10d},={r11},={r12},{dil},{rsi},{dl},{cx},{r8d},{r9},{rax},{bl},{bp},{r10d},{r11},{r12},~{fpsr},~{fpcr},~{flags},~{dirflag},~{memory},~{r13},~{r14},~{r15},~{xmm0},~{xmm1},~{xmm2},~{xmm3},~{xmm4},~{xmm5},~{xmm6},~{xmm7},~{xmm8},~{xmm9},~{xmm10},~{xmm11},~{xmm12},~{xmm13},~{xmm14},~{xmm15},~{xmm16},~{xmm17},~{xmm18},~{xmm19},~{xmm20},~{xmm21},~{xmm22},~{xmm23},~{xmm24},~{xmm25},~{xmm26},~{xmm27},~{xmm28},~{xmm29},~{xmm30},~{xmm31}"(i1 %b, i64 %i, i8 %i8, i16 %i16, i32 %i32, i64 %i64, i64 %u, i8 %u8, i16 %u16, i32 %u32, i64 %u64, i64 %uptr) #4
+  %0 = call { i1, i64, i8, i16, i32, i64, i64, i8, i16, i32, i64, i64 } asm sideeffect alignstack "sub sp, sp, #144\0A\09ldrsb w0, [sp, #8]\0A\09ldr x1, [sp, #16]\0A\09ldrsb w2, [sp, #24]\0A\09ldrsh w3, [sp, #26]\0A\09ldr w4, [sp, #28]\0A\09ldr x5, [sp, #32]\0A\09ldr x6, [sp, #40]\0A\09ldrsb w7, [sp, #48]\0A\09ldrsh w8, [sp, #50]\0A\09ldr w9, [sp, #52]\0A\09ldr x10, [sp, #56]\0A\09ldr x11, [sp, #64]\0A\09bl \22__GoABI0_main.AsmAllIntTypes\22\0A\09ldrb w0, [sp, #72]\0A\09ldr x1, [sp, #80]\0A\09ldrsb w2, [sp, #88]\0A\09ldrsh w3, [sp, #90]\0A\09ldr w4, [sp, #92]\0A\09ldr x5, [sp, #96]\0A\09ldr x6, [sp, #104]\0A\09ldrb w7, [sp, #112]\0A\09ldrh w8, [sp, #114]\0A\09ldr w9, [sp, #116]\0A\09ldr x10, [sp, #120]\0A\09ldr x11, [sp, #128]\0A\09add sp, sp, #144", "={w0},={x1},={w2},={w3},={w4},={x5},={x6},={w7},={w8},={w9},={x10},={x11},{w0},{x1},{w2},{w3},{w4},{x5},{x6},{w7},{w8},{w9},{x10},{x11},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{lr},~{nzcv},~{ffr},~{vg},~{memory},~{x18},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{d0},~{d1},~{d2},~{d3},~{d4},~{d5},~{d6},~{d7},~{d8},~{d9},~{d10},~{d11},~{d12},~{d13},~{d14},~{d15},~{d16},~{d17},~{d18},~{d19},~{d20},~{d21},~{d22},~{d23},~{d24},~{d25},~{d26},~{d27},~{d28},~{d29},~{d30}"(i1 %b, i64 %i, i8 %i8, i16 %i16, i32 %i32, i64 %i64, i64 %u, i8 %u8, i16 %u16, i32 %u32, i64 %u64, i64 %uptr) #4
   %1 = extractvalue { i1, i64, i8, i16, i32, i64, i64, i8, i16, i32, i64, i64 } %0, 0
   %2 = extractvalue { i1, i64, i8, i16, i32, i64, i64, i8, i16, i32, i64, i64 } %0, 1
   %3 = extractvalue { i1, i64, i8, i16, i32, i64, i64, i8, i16, i32, i64, i64 } %0, 2
@@ -95,10 +95,10 @@ entry:
   ret { i1, i64, i8, i16, i32, i64, i64, i8, i16, i32, i64, i64 } %24
 }
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden { float, double, { float, float }, { double, double } } @main.AsmAllFloatTypes(float %f32, double %f64, float %c64.r, float %c64.i, double %c128.r, double %c128.i, ptr %context) unnamed_addr #1 {
 entry:
-  %0 = call { float, double, float, float, double, double } asm sideeffect alignstack "subq $$80, %rsp\0A\09movss %xmm0, 0(%rsp)\0A\09movsd %xmm1, 8(%rsp)\0A\09movss %xmm2, 16(%rsp)\0A\09movss %xmm3, 20(%rsp)\0A\09movsd %xmm4, 24(%rsp)\0A\09movsd %xmm5, 32(%rsp)\0A\09callq \22__GoABI0_main.AsmAllFloatTypes\22\0A\09movss 40(%rsp), %xmm0\0A\09movsd 48(%rsp), %xmm1\0A\09movss 56(%rsp), %xmm2\0A\09movss 60(%rsp), %xmm3\0A\09movsd 64(%rsp), %xmm4\0A\09movsd 72(%rsp), %xmm5\0A\09addq $$80, %rsp", "={xmm0},={xmm1},={xmm2},={xmm3},={xmm4},={xmm5},{xmm0},{xmm1},{xmm2},{xmm3},{xmm4},{xmm5},~{fpsr},~{fpcr},~{flags},~{dirflag},~{memory},~{rdi},~{rsi},~{rdx},~{rcx},~{r8},~{r9},~{rax},~{rbx},~{rbp},~{r10},~{r11},~{r12},~{r13},~{r14},~{r15},~{xmm6},~{xmm7},~{xmm8},~{xmm9},~{xmm10},~{xmm11},~{xmm12},~{xmm13},~{xmm14},~{xmm15},~{xmm16},~{xmm17},~{xmm18},~{xmm19},~{xmm20},~{xmm21},~{xmm22},~{xmm23},~{xmm24},~{xmm25},~{xmm26},~{xmm27},~{xmm28},~{xmm29},~{xmm30},~{xmm31}"(float %f32, double %f64, float %c64.r, float %c64.i, double %c128.r, double %c128.i) #4
+  %0 = call { float, double, float, float, double, double } asm sideeffect alignstack "sub sp, sp, #96\0A\09str s0, [sp, #8]\0A\09str d1, [sp, #16]\0A\09str s2, [sp, #24]\0A\09str s3, [sp, #28]\0A\09str d4, [sp, #32]\0A\09str d5, [sp, #40]\0A\09bl \22__GoABI0_main.AsmAllFloatTypes\22\0A\09ldr s0, [sp, #48]\0A\09ldr d1, [sp, #56]\0A\09ldr s2, [sp, #64]\0A\09ldr s3, [sp, #68]\0A\09ldr d4, [sp, #72]\0A\09ldr d5, [sp, #80]\0A\09add sp, sp, #96", "={s0},={d1},={s2},={s3},={d4},={d5},{s0},{d1},{s2},{s3},{d4},{d5},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{lr},~{nzcv},~{ffr},~{vg},~{memory},~{x18},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{d6},~{d7},~{d8},~{d9},~{d10},~{d11},~{d12},~{d13},~{d14},~{d15},~{d16},~{d17},~{d18},~{d19},~{d20},~{d21},~{d22},~{d23},~{d24},~{d25},~{d26},~{d27},~{d28},~{d29},~{d30}"(float %f32, double %f64, float %c64.r, float %c64.i, double %c128.r, double %c128.i) #4
   %1 = extractvalue { float, double, float, float, double, double } %0, 0
   %2 = extractvalue { float, double, float, float, double, double } %0, 1
   %3 = extractvalue { float, double, float, float, double, double } %0, 2
@@ -116,12 +116,12 @@ entry:
   ret { float, double, { float, float }, { double, double } } %14
 }
 
-; Function Attrs: nounwind uwtable(sync)
+; Function Attrs: nounwind
 define hidden { [2 x i64], ptr, ptr, ptr, { ptr, i64, i64 }, %runtime._string, %main.AsmStruct, ptr } @main.AsmAllOtherTypes([2 x i64] %a, ptr dereferenceable_or_null(64) %c, ptr dereferenceable_or_null(80) %m, ptr dereferenceable_or_null(8) %ptr, ptr %slice.data, i64 %slice.len, i64 %slice.cap, ptr %str.data, i64 %str.len, i64 %stru.X, i64 %stru.Y, ptr %uptr, ptr %context) unnamed_addr #1 {
 entry:
   %0 = extractvalue [2 x i64] %a, 0
   %1 = extractvalue [2 x i64] %a, 1
-  %2 = call { i64, i64, ptr, ptr, ptr, ptr, i64, i64, ptr, i64, i64, i64, ptr } asm sideeffect alignstack "subq $$208, %rsp\0A\09movq %rdi, 0(%rsp)\0A\09movq %rsi, 8(%rsp)\0A\09movq %rdx, 16(%rsp)\0A\09movq %rcx, 24(%rsp)\0A\09movq %r8, 32(%rsp)\0A\09movq %r9, 40(%rsp)\0A\09movq %rax, 48(%rsp)\0A\09movq %rbx, 56(%rsp)\0A\09movq %rbp, 64(%rsp)\0A\09movq %r10, 72(%rsp)\0A\09movq %r11, 80(%rsp)\0A\09movq %r12, 88(%rsp)\0A\09movq %r13, 96(%rsp)\0A\09callq \22__GoABI0_main.AsmAllOtherTypes\22\0A\09movq 104(%rsp), %rdi\0A\09movq 112(%rsp), %rsi\0A\09movq 120(%rsp), %rdx\0A\09movq 128(%rsp), %rcx\0A\09movq 136(%rsp), %r8\0A\09movq 144(%rsp), %r9\0A\09movq 152(%rsp), %rax\0A\09movq 160(%rsp), %rbx\0A\09movq 168(%rsp), %rbp\0A\09movq 176(%rsp), %r10\0A\09movq 184(%rsp), %r11\0A\09movq 192(%rsp), %r12\0A\09movq 200(%rsp), %r13\0A\09addq $$208, %rsp", "={rdi},={rsi},={rdx},={rcx},={r8},={r9},={rax},={rbx},={rbp},={r10},={r11},={r12},={r13},{rdi},{rsi},{rdx},{rcx},{r8},{r9},{rax},{rbx},{rbp},{r10},{r11},{r12},{r13},~{fpsr},~{fpcr},~{flags},~{dirflag},~{memory},~{r14},~{r15},~{xmm0},~{xmm1},~{xmm2},~{xmm3},~{xmm4},~{xmm5},~{xmm6},~{xmm7},~{xmm8},~{xmm9},~{xmm10},~{xmm11},~{xmm12},~{xmm13},~{xmm14},~{xmm15},~{xmm16},~{xmm17},~{xmm18},~{xmm19},~{xmm20},~{xmm21},~{xmm22},~{xmm23},~{xmm24},~{xmm25},~{xmm26},~{xmm27},~{xmm28},~{xmm29},~{xmm30},~{xmm31}"(i64 %0, i64 %1, ptr %c, ptr %m, ptr %ptr, ptr %slice.data, i64 %slice.len, i64 %slice.len, ptr %str.data, i64 %str.len, i64 %stru.X, i64 %stru.Y, ptr %uptr) #4
+  %2 = call { i64, i64, ptr, ptr, ptr, ptr, i64, i64, ptr, i64, i64, i64, ptr } asm sideeffect alignstack "sub sp, sp, #224\0A\09ldr x0, [sp, #8]\0A\09ldr x1, [sp, #16]\0A\09ldr x2, [sp, #24]\0A\09ldr x3, [sp, #32]\0A\09ldr x4, [sp, #40]\0A\09ldr x5, [sp, #48]\0A\09ldr x6, [sp, #56]\0A\09ldr x7, [sp, #64]\0A\09ldr x8, [sp, #72]\0A\09ldr x9, [sp, #80]\0A\09ldr x10, [sp, #88]\0A\09ldr x11, [sp, #96]\0A\09ldr x12, [sp, #104]\0A\09bl \22__GoABI0_main.AsmAllOtherTypes\22\0A\09ldr x0, [sp, #112]\0A\09ldr x1, [sp, #120]\0A\09ldr x2, [sp, #128]\0A\09ldr x3, [sp, #136]\0A\09ldr x4, [sp, #144]\0A\09ldr x5, [sp, #152]\0A\09ldr x6, [sp, #160]\0A\09ldr x7, [sp, #168]\0A\09ldr x8, [sp, #176]\0A\09ldr x9, [sp, #184]\0A\09ldr x10, [sp, #192]\0A\09ldr x11, [sp, #200]\0A\09ldr x12, [sp, #208]\0A\09add sp, sp, #224", "={x0},={x1},={x2},={x3},={x4},={x5},={x6},={x7},={x8},={x9},={x10},={x11},={x12},{x0},{x1},{x2},{x3},{x4},{x5},{x6},{x7},{x8},{x9},{x10},{x11},{x12},~{x0},~{x1},~{x2},~{x3},~{x4},~{x5},~{x6},~{x7},~{x8},~{x9},~{x10},~{x11},~{x12},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{lr},~{nzcv},~{ffr},~{vg},~{memory},~{x18},~{x13},~{x14},~{x15},~{x16},~{x17},~{x19},~{x20},~{x21},~{x22},~{x23},~{x24},~{x25},~{x26},~{x27},~{x28},~{d0},~{d1},~{d2},~{d3},~{d4},~{d5},~{d6},~{d7},~{d8},~{d9},~{d10},~{d11},~{d12},~{d13},~{d14},~{d15},~{d16},~{d17},~{d18},~{d19},~{d20},~{d21},~{d22},~{d23},~{d24},~{d25},~{d26},~{d27},~{d28},~{d29},~{d30}"(i64 %0, i64 %1, ptr %c, ptr %m, ptr %ptr, ptr %slice.data, i64 %slice.len, i64 %slice.len, ptr %str.data, i64 %str.len, i64 %stru.X, i64 %stru.Y, ptr %uptr) #4
   %3 = extractvalue { i64, i64, ptr, ptr, ptr, ptr, i64, i64, ptr, i64, i64, i64, ptr } %2, 0
   %4 = extractvalue { i64, i64, ptr, ptr, ptr, ptr, i64, i64, ptr, i64, i64, i64, ptr } %2, 1
   %5 = extractvalue { i64, i64, ptr, ptr, ptr, ptr, i64, i64, ptr, i64, i64, i64, ptr } %2, 2
@@ -155,8 +155,8 @@ entry:
   ret { [2 x i64], ptr, ptr, ptr, { ptr, i64, i64 }, %runtime._string, %main.AsmStruct, ptr } %32
 }
 
-attributes #0 = { "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" }
-attributes #1 = { nounwind uwtable(sync) "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" }
-attributes #2 = { noinline nounwind alignstack=16 uwtable(sync) "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" }
-attributes #3 = { naked nounwind uwtable(sync) "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" }
+attributes #0 = { "target-features"="+neon" }
+attributes #1 = { nounwind "target-features"="+neon" }
+attributes #2 = { noinline nounwind "target-features"="+neon" }
+attributes #3 = { naked nounwind "target-features"="+neon" }
 attributes #4 = { nounwind }

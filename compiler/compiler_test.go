@@ -50,15 +50,19 @@ func TestCompiler(t *testing.T) {
 		{"channel.go", "", ""},
 		{"gc.go", "", ""},
 		{"goasm.go", "linux/amd64", ""},
+		{"goasm.go", "linux/arm64", ""},
 	}
 
 	// For the goasm.go test.
 	goAsmReferences := map[string]string{
-		"main.AsmSqrt":         "__GoABI0_main.AsmSqrt",
-		"main.AsmAdd":          "__GoABI0_main.AsmAdd",
-		"main.AsmFoo":          "__GoABI0_main.AsmFoo",
-		"main.asmExport":       "__GoABI0_main.asmExport",
-		"main.asmGlobalExport": "__GoABI0_main.asmGlobalExport",
+		"main.AsmSqrt":          "__GoABI0_main.AsmSqrt",
+		"main.AsmAdd":           "__GoABI0_main.AsmAdd",
+		"main.AsmFoo":           "__GoABI0_main.AsmFoo",
+		"main.AsmAllIntTypes":   "__GoABI0_main.AsmAllIntTypes",
+		"main.AsmAllFloatTypes": "__GoABI0_main.AsmAllFloatTypes",
+		"main.AsmAllOtherTypes": "__GoABI0_main.AsmAllOtherTypes",
+		"main.asmExport":        "__GoABI0_main.asmExport",
+		"main.asmGlobalExport":  "__GoABI0_main.asmGlobalExport",
 	}
 	if goMinor >= 20 {
 		tests = append(tests, testCase{"go1.20.go", "", ""})
