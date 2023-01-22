@@ -199,6 +199,9 @@ func (uart *UART) handleInterrupt(interrupt.Interrupt) {
 	}
 }
 
+// check for ensuring we fulfill interface
+var _ i2cController = (*I2C)(nil)
+
 // I2C on the NRF.
 type I2C struct {
 	Bus nrf.TWI_Type
@@ -257,6 +260,15 @@ func (i2c *I2C) Configure(config I2CConfig) error {
 
 	i2c.Bus.ENABLE.Set(nrf.TWI_ENABLE_ENABLE_Enabled)
 
+	return nil
+}
+
+// SetBaudRate sets the I2C frequency. It has the side effect of also
+// enabling the I2C hardware if disabled beforehand.
+//
+//go:inline
+func (i2c *I2C) SetBaudRate(br uint32) error {
+	// TODO: implement
 	return nil
 }
 

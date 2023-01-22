@@ -47,6 +47,9 @@ type I2CConfig struct {
 	SDA, SCL Pin
 }
 
+// check for ensuring we fulfill interface
+var _ i2cController = (*I2C)(nil)
+
 type I2C struct {
 	Bus           *rp.I2C0_Type
 	restartOnNext bool
