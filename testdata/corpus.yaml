@@ -24,23 +24,19 @@
 
 - repo: github.com/buger/jsonparser
 - repo: github.com/dgryski/go-bloomindex
-  tags: purego noasm
 - repo: github.com/dgryski/go-arc
 - repo: github.com/dgryski/go-camellia
 - repo: github.com/dgryski/go-change
 - repo: github.com/dgryski/go-chaskey
-  tags: appengine purego noasm
   skipwasi: true # siphash has build tag issues
 - repo: github.com/dgryski/go-clefia
 - repo: github.com/dgryski/go-clockpro
 - repo: github.com/dgryski/go-cobs
 - repo: github.com/dgryski/go-cuckoof
-  tags: pureno noasm
 - repo: github.com/dgryski/go-discreterand
 - repo: github.com/dgryski/go-expirecache
 - repo: github.com/dgryski/go-factor
 - repo: github.com/dgryski/go-farm
-  tags: purego noasm
 - repo: github.com/dgryski/go-fuzzstr
 - repo: github.com/dgryski/go-hollow
 - repo: github.com/dgryski/go-idea
@@ -55,18 +51,13 @@
 - repo: github.com/dgryski/go-linebreak
 - repo: github.com/dgryski/go-linlog
 - repo: github.com/dgryski/go-maglev
-  tags: appengine # for dchest/siphash
   skipwasi: true
 - repo: github.com/dgryski/go-marvin32
-  tags: purego
 - repo: github.com/dgryski/go-md5crypt
 - repo: github.com/dgryski/go-metro
-  tags: purego noasm
 - repo: github.com/dgryski/go-misty1
 - repo: github.com/dgryski/go-mph
-  tags: purego noasm
 - repo: github.com/dgryski/go-mpchash
-  tags: appengine # for dchest/siphash
   skipwasi: true
 - repo: github.com/dgryski/go-neeva
 - repo: github.com/dgryski/go-nibz
@@ -82,7 +73,6 @@
 - repo: github.com/dgryski/go-s4lru
 - repo: github.com/dgryski/go-sequitur
 - repo: github.com/dgryski/go-sip13
-  tags: purego noasm
 - repo: github.com/dgryski/go-skinny
 - repo: github.com/dgryski/go-skip32
 - repo: github.com/dgryski/go-skipjack
@@ -174,7 +164,6 @@
   #- pkg: internal/gen/bitfield # panic: unimplemented: (reflect.Type).Name()
   #- pkg: number # fails due to printf %T formatting
 - repo: golang.org/x/image
-  tags: noasm
   subdirs:
   #- pkg: bmp # needs  _time.startTimer
   - pkg: ccitt
